@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sentiment Analyzer</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>😄 Sentiment Analyzer</h1>
+
+    <form method="POST">
+        <input type="text" name="text" placeholder="Type something..." required>
+        <button type="submit">🔍 Analyze</button>
+    </form>
+
+    {% if result %}
+    <div class="result-box {{ history[0].color }}">
+        <h2>{{ history[0].emoji }} {{ result }}</h2>
+        <p>Score: {{ score }}</p>
+    </div>
+    {% endif %}
+
+    <h3>📊 History</h3>
+
+    {% for item in history %}
+    <div class="card {{ item.color }}">
+        <div class="left">{{ item.emoji }}</div>
+        <div class="right">
+            <b>{{ item.text }}</b>
+            <p>{{ item.result }} | Score: {{ item.score }}</p>
+        </div>
+    </div>
+    {% endfor %}
+
+</div>
+
+</body>
+</html>
